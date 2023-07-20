@@ -1,24 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Expensive Calculator </title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<h1>Expensive Calculator</h1>
-<body>
-    <h2><br>Total Balance:2000</br></h2>
-    <h3>Amount Spended:<h3>
-        <label for="number">Choose</label>
-        <select name="number" id="number">
-          <option value="Expensive">Expensive</option>
-          <option value="income">income</option>
-        <br><input type="text"></br>
-        <br><button id="mybtn" type="button">Submit</button></br></select>                               
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Expensive Calculator </title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <h1>Expensive Calculator</h1>
+        <h2>Total Balance: <span id="totalBalance">2000</span></h2>
+        <h3>Amount Spended:<h3>
+            <label for="number">Choose</label>
+            <select name="number" id="number">
+            <option value="Expensive">Expensive</option>
+            <option value="income">income</option>
+            </select>
+            <label for="date">date</label>
+            <input type="date" id ="input_date">
+            <input type="text" id="input_number"></br>
+            <button id="mybtn" type="button" onclick={handleBalance()}>Submit</button>
+            <div id="transactions">Transactions</div>
+
+    </body>
     <script>
+        function handleBalance(){
+            let totalBalance = parseInt(document.getElementById("totalBalance").innerHTML);
+            let currentValue = parseInt(document.getElementById("input_number").value)
+            let date = (document.getElementById("input_date").value)
+          
+            let type = document.getElementById("number").value;
+          
+            console.log(currentValue);
+            //console.log(date)
+          
+            if(type == "income"){
+                totalBalance = totalBalance + currentValue 
+            }
+            else{
+                totalBalance = totalBalance - currentValue  
+            }
+            document.getElementById("totalBalance").innerHTML = totalBalance
+            let transactionElement = document.createElement("div");
+            transactionElement.innerHTML = type +" " +" " + currentValue +" " +" " + totalBalance +" " +date
+            let parentElement=document.getElementById("transactions")
+            parentElement.appendChild(transactionElement)
+        }
         
+			
     </script>
-    
-</body>
-</html>
+</html>                                     
